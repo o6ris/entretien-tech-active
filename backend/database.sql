@@ -1,6 +1,7 @@
-CREATE TABLE item (
-  id int(11) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  title varchar(255) NOT NULL
+USE active_test;
+CREATE TABLE number (
+  id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  myNumber INT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO item (title) VALUES ('Stuff'), ('Doodads');
+INSERT INTO number (myNumber) VALUES (1), (5);

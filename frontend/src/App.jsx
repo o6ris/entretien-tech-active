@@ -4,9 +4,8 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className="bg-gray-900 h-screen">
       <Home />
-      <p>coucou</p>
     </div>
   );
 }

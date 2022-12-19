@@ -15,5 +15,6 @@ const numberControllers = require("./controllers/numberControllers");
 
 router.get("/numbers", numberControllers.browse);
 router.post("/numbers", numberControllers.add);
+router.delete("/numbers/:id", numberControllers.destroy);
 
 module.exports = router;

@@ -16,8 +16,24 @@ const add = (req, res) => {
   const number = req.body;
   models.number
     .insert(number)
-    .then(([oneNumber]) => {
-      res.location(`/numbers/${oneNumber.insertId}`).sendStatus(201);
+    .then(([result]) => {
+      res.location(`/numbers/${result.insertId}`).sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const destroy = (req, res) => {
+  models.number
+    .delete(req.params.id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
     })
     .catch((err) => {
       console.error(err);
@@ -28,4 +44,5 @@ const add = (req, res) => {
 module.exports = {
   browse,
   add,
+  destroy,
 };

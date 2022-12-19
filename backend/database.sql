@@ -1,4 +1,7 @@
 USE active_test;
+DROP DATABASE IF EXISTS active_test;
+CREATE DATABASE active_test;
+USE active_test;
 CREATE TABLE number (
   id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   myNumber INT NOT NULL

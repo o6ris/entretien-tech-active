@@ -65,7 +65,7 @@ export default function Home() {
           className="border p-2 bg-gray-50"
           type="button"
         >
-          Show list of Numbers
+          {numbers.length === 0 ? "No Numbers in the list" : "Show Numbers"}
         </button>
         {isListDisplayed && (
           <div className="flex flex-col gap-3">

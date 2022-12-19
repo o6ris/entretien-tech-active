@@ -5,6 +5,12 @@ class NumberManager extends AbstractManager {
     super({ table: "number" });
   }
 
+  findAllInOrder() {
+    return this.connection.query(
+      `select * from  ${this.table} order by myNumber asc`
+    );
+  }
+
   insert(number) {
     return this.connection.query(
       `insert into ${this.table} (myNumber) values (?)`,

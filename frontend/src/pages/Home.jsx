@@ -6,7 +6,7 @@ export default function Home() {
   const [isListDisplayed, setIsListDisplayed] = useState(false);
   const [nbrOnChange, setNbrOnChange] = useState("");
 
-  // Function handle get all numbers
+  // This Function handle get all numbers
   const getAllNumbers = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/numbers`)
@@ -14,8 +14,8 @@ export default function Home() {
       .catch((error) => console.error(error));
   };
 
-  // Function handle post a number
-  const addNumber = () => {
+  // This Function handle post a number
+  const handleAddNumber = () => {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/numbers`, {
         myNumber: nbrOnChange,
@@ -26,8 +26,14 @@ export default function Home() {
       .catch((error) => console.error(error));
   };
 
-  const handleButtonAddNumber = () => {
-    addNumber();
+  // This Function handle delete a number
+  const handleDeleteNumber = (numberId) => {
+    axios
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/numbers/${numberId}`)
+      .then(() => {
+        getAllNumbers();
+      })
+      .catch((error) => console.error(error));
   };
 
   useEffect(() => {
@@ -45,7 +51,7 @@ export default function Home() {
             type="text"
           />
           <button
-            onClick={handleButtonAddNumber}
+            onClick={handleAddNumber}
             className="border p-2 bg-gray-50"
             type="button"
           >
@@ -53,7 +59,7 @@ export default function Home() {
           </button>
         </label>
       </form>
-      <div>
+      <div className="flex flex-col">
         <button
           onClick={() => setIsListDisplayed(!isListDisplayed)}
           className="border p-2 bg-gray-50"
@@ -62,13 +68,24 @@ export default function Home() {
           Show list of Numbers
         </button>
         {isListDisplayed && (
-          <ul className="flex flex-col w-full items-center gap-3 mt-5">
-            {numbers.map((number) => (
-              <li className="text-lg text-gray-50">
-                number : {number.myNumber}
-              </li>
-            ))}
-          </ul>
+          <div className="flex flex-col gap-3">
+            <ul className="flex flex-col w-full items-center gap-3 mt-5">
+              {numbers.map((number) => (
+                <div className="flex gap-3 w-full justify-between">
+                  <button type="button" className="text-lg text-gray-50">
+                    number: {number.myNumber}
+                  </button>
+                  <button
+                    onClick={() => handleDeleteNumber(number.id)}
+                    type="button"
+                    className="p-2 bg-gray-50 hover:font-bold hover:bg-red-500 hover:text-gray-50"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
     </div>

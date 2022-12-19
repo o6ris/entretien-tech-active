@@ -4,11 +4,30 @@ import axios from "axios";
 export default function Home() {
   const [numbers, setNumbers] = useState([]);
   const [isListDisplayed, setIsListDisplayed] = useState(false);
+  const [nbrOnChange, setNbrOnChange] = useState("");
+
+  // Function handle get all numbers
   const getAllNumbers = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/numbers`)
       .then((nbrs) => setNumbers(nbrs.data))
       .catch((error) => console.error(error));
+  };
+
+  // Function handle post a number
+  const addNumber = () => {
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/numbers`, {
+        myNumber: nbrOnChange,
+      })
+      .then(() => {
+        getAllNumbers();
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleButtonAddNumber = () => {
+    addNumber();
   };
 
   useEffect(() => {
@@ -21,10 +40,15 @@ export default function Home() {
       <form className="flex w-full justify-center">
         <label className="w-1/4 border flex justify-between p-1">
           <input
+            onChange={(e) => setNbrOnChange(e.target.value)}
             className="w-3/4 bg-transparent focus:outline-none text-5xl text-center text-gray-50"
             type="text"
           />
-          <button className="border p-2 bg-gray-50" type="button">
+          <button
+            onClick={handleButtonAddNumber}
+            className="border p-2 bg-gray-50"
+            type="button"
+          >
             Add Number
           </button>
         </label>

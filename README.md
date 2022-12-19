@@ -5,9 +5,9 @@
 - In VSCode, install plugins **Prettier - Code formatter** and **ESLint** and configure them
 - Clone this repo, enter it
 - Run command `npm run setup`
-- !IMPORTANT!: To launch the backend server, you'll need an environment file with database credentials. You'll find a template in `backend/.env.sample`
+- !IMPORTANT!: To launch the backend server, you'll need an environment file (.env) with database credentials. You'll find a template in `backend/.env.sample`
 - Run command `npm run migrate`
-- !IMPORTANT!: To link the API with the front, you'll need an environment file with the link of the api. You'll find a template one in `frontend/.env.sample`
+- !IMPORTANT!: To link the API with the front, you'll need an environment file (.env) with the link of the api. You'll find a template one in `frontend/.env.sample`
 - Run command `npm run dev` to starts both servers (frontend + backend)
 
 ### Available Commands
